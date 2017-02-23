@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+<h1>Showing Book: <%=@book.title %></h1>
+<h3>By: <%= @book.author.name %></h3>
+
+<span><b>Year published: </b><%= @book.yr_pub %></span><br>
+<span><b>Read: </b><%= @book.read %></span><br>
+<span><b>Description: </b><%= @book.description %></span><br>
+
+<br>
+<%= link_to 'Edit this book', edit_book_path(@book) %> |
+<%= link_to 'Back to books listing', books_path %>

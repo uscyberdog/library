@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<!-- Display a single author -->
+<h1>Showing Author: <%= @author.name %></h1>
+<%= image_tag @author.photo.url , class: "my-img" %><br>
+
+<span>Favorite: <%= @author.favorite %></span><br>
+<span>Bio: <%= @author.bio %></span>
+
+<h3><b>Books by: <%= @author.name %></b></h3>
+<!-- example to show image_tag -->
+<!-- add author.image_url to db - then could reference in line below  for each author -->
+
+<% @author.books.each do |book| %>
+    <p><b><%= link_to book.title, book_path(book) %>, </b><%= book.yr_pub %> 
+    <br>
+    Read: <%= book.read %><br>
+    Description: <%= book.description %>
+    </p>
+<% end %>
+<% if @author.id > 1 %>
+	<%= link_to 'Previous Author', Author.find(@author.id - 1) %> |
+<% end %>
+<%= link_to 'Edit this author', edit_author_path(@author) %> |
+<%= link_to 'Back to Authors Listing', authors_path %>
+<% if Author.last.id > @author.id %>
+	 | <%= link_to 'Next Author', Author.find(@author.id + 1) %>
+<% end %>

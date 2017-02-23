@@ -1,0 +1,35 @@
+<%= form_for(book) do |f| %>
+  <% if book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+
+      <ul>
+      <% book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :author_id %>
+    <%= f.select :author_id, Author.pluck(:name, :id) %>
+
+    <%= f.label :yr_pub %>
+    <%= f.number_field :yr_pub, in: 1940..2017 %>
+
+    <% bool = [["Yes", true],["No", false]] %>
+    <%= f.label :read %>
+    <%= f.select :read, bool %>
+<!-- Insert boolean input for :read field here -->
+
+    <%= f.label :description %>
+    <%= f.text_area :description, size: "100x12"%>
+  </fieldset>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
